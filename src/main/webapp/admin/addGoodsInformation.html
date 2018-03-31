@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品信息</title>
+    <link type="text/css" rel="stylesheet" href="../css/themes/insdep/easyui.css">
+    <script type="text/javascript" src="../js/jquery1.9.1.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui-1.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <style>
+        label {
+            display: inline-block;
+            width: 81px;
+            margin-left: 10px;
+        }
+        .form-div{
+            margin-left: 250px;
+            margin-bottom: 20px;
+        }
+        .button-div{
+            margin-left:300px;
+            margin-bottom: 20px;
+        }
+        .label-width{
+            margin-left: 80px;
+        }
+        .panel-body-noheader{
+            max-height:198px;
+            height:auto !important;
+        }
+        .mm{
+            width: 120px !important;
+        }
+    </style>
+</head>
+
+<body>
+<form  style="margin-top: 20px" id="addGoods" action="/goodsInformation/addGoodsInformation" type="post" enctype="multipart/form-data">
+    <div class="form-div">
+        <label>商品名称</label>
+        <input class="easyui-textbox" type="text" name="goodsid" id="goodsid"  />
+    </div>
+    <div class="form-div">
+        <label>商品类别</label>
+        <input class="easyui-combobox" type="text" id="classid" name="classid"  />
+    </div>
+    <div class="form-div">
+        <label>商品简介</label>
+        <input class="easyui-textbox" type="text" name="goodsintroduce" id="goodsintroduce"  />
+    </div>
+    <div class="form-div">
+        <label>商品总量</label>
+        <input class="easyui-textbox" type="text" name="goodsweight" id="goodsweight"  />
+    </div>
+    <div class="form-div">
+        <label>商品单价</label>
+        <input class="easyui-textbox" type="text" name="goodsprice" id="goodsprice"  />
+    </div>
+    <div class="form-div">
+        <label>商品图片</label>
+        <input type="file" id="imgAddress" name="imgAddress"/>
+    </div>
+    <div class="button-div" > <a class="easyui-linkbutton button-blue label-width" onclick="applyForm()">提交</a></div>
+</form>
+<script>
+    function applyForm() {
+        var formdata=new FormData($('form')[0]);
+        $.ajax({
+            url:getContextPath()+"goodsInformation/addGoodsInformation",
+            type:'post',
+            dataType:'json',
+            data:formdata,
+            cache : false,
+            contentType : false,
+            processData : false,
+            success:function (data) {
+                if(data.success)
+                {
+                    alert("商品添加成功！");
+                }
+                else{
+                    alert("商品添加失败!");
+                }
+            }
+        })
+    }
+
+    $('#classid').combobox({
+        editable:false,
+        valueField:'valuef',
+        textField:'textf',
+        data:[{valuef:'国产水果',textf:'国产水果',selected:true},{valuef:'进口水果',textf:'进口水果'}]
+    });
+</script>
+</body>
+</html>

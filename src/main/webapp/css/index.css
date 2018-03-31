@@ -1,0 +1,131 @@
+body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+}
+.bg{
+    width: 100%;
+    height: 100%;
+}
+.big{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: absolute;
+
+}
+.ban{
+    position: relative;
+    width: 100%;
+    height: 13%;
+    font-size: 2rem;
+    background: url(../img/ban.png) no-repeat;
+    background-size: 100% 100%;
+}
+.dtext{
+    position: absolute;
+    top: 7.5%;
+    right: 5%;
+    font-size: 1.5rem;
+    white-space:nowrap;
+    margin-right: 40px;
+
+}
+.banspan{
+    position: absolute;
+    /*display: block;*/
+    /*transform: translate(-50%,-50%);*/
+    left: 50%;
+    top:50%;
+}
+.divbutton{
+    position: absolute;
+    right: 0.5%;
+    top:8%;
+}
+.outbtn{
+    width: 60px;
+    height: 25px;
+    border: 0;
+    background: url("../img/out.png") no-repeat ;
+    background-size: 100% 100%;
+}
+.outbtn:hover{
+    background: url(../img/default.png) no-repeat;
+    background-size: 100% 100%;
+}
+/*.outbutton{*/
+/*display: block;*/
+/*width: 73px;*/
+/*height: 50px;*/
+
+/*background: url(../img/out.png) 0 7px no-repeat;*/
+/*position: relative;*/
+/*right: -930px;*/
+/*top:35px;*/
+/*}*/
+/*.outbutton:hover{*/
+/*background: url(../img/default.png) 0 7px no-repeat;*/
+/*}*/
+.info{
+    width: 11%;
+    height: 5%;
+    background:  #61866b;
+    color: white;
+    font-size: 1.5rem;
+
+}
+
+/*.navhead{*/
+/*width: 11%;*/
+/*height: 100%;*/
+/*display: block;*/
+/*font-size: 1.5rem;*/
+
+/*background: rgba(51,67,73,0.5);*/
+
+/*}*/
+/*.navbottom{*/
+/*position: relative;*/
+/*right:-89%;*/
+/*top:-100%;*/
+/*width: 11%;*/
+/*height: 100%;*/
+/*display: block;*/
+/*background: rgba(51,67,73,0.5);*/
+/*}*/
+.navtext{
+    position: relative;
+    left: 5px;
+    display: block;
+    padding-top: 8px;
+    margin-left: 15px;
+    font-size: 1.5rem;
+
+}
+.nav{
+    height: 88%;
+    width: 11%;
+    background: #393D49;
+}
+.ifm{
+    height: 100%;
+    width: 89%;
+    position: relative;
+    right:-11%;
+    top:-93%;
+}
+iframe{
+    height: 93%;
+    width: 100%;
+}
+a:hover{
+    background:#424651;
+}
+/*@media screen and (min-width: 1200px){body{*/
+/*overflow-x: hidden;*/
+/*}  }*/
+/*@media screen and (min-height: 700px){body{*/
+/*overflow-y: hidden;*/
+/*}  }*/

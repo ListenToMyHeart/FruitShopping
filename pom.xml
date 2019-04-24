@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.fruit</groupId>
-  <artifactId>manager4090</artifactId>
+  <artifactId>FruitShopping</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>manager4090 Maven Webapp</name>
+  <name>FruitShopping Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -110,6 +110,6 @@
 
 </dependencies>
 <build>
-<finalName>manager4090</finalName>
+<finalName>FruitShopping</finalName>
 </build>
 </project>

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.DAO.GoodsinformationDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.Model.Goodsinformation">
+    <id column="pkid" jdbcType="INTEGER" property="pkid" />
+    <result column="goodsid" jdbcType="VARCHAR" property="goodsid" />
+    <result column="classid" jdbcType="VARCHAR" property="classid" />
+    <result column="goodsintroduce" jdbcType="VARCHAR" property="goodsintroduce" />
+    <result column="goodsbrand" jdbcType="VARCHAR" property="goodsbrand" />
+    <result column="goodsunit" jdbcType="VARCHAR" property="goodsunit" />
+    <result column="goodsweight" jdbcType="DECIMAL" property="goodsweight" />
+    <result column="goodsurl" jdbcType="VARCHAR" property="goodsurl" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="pregoodsprice" jdbcType="DECIMAL" property="pregoodsprice" />
+    <result column="goodsprice" jdbcType="DECIMAL" property="goodsprice" />
+    <result column="isrefinement" jdbcType="VARCHAR" property="isrefinement" />
+    <result column="ishot" jdbcType="VARCHAR" property="ishot" />
+    <result column="isdiscount" jdbcType="VARCHAR" property="isdiscount" />
+    <result column="updatatime" jdbcType="TIMESTAMP" property="updatatime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pkid, goodsid, classid, goodsintroduce, goodsbrand, goodsunit, goodsweight, goodsurl, 
+    sales, pregoodsprice, goodsprice, isrefinement, ishot, isdiscount, updatatime
+  </sql>
+  <select id="selectByExample" parameterType="com.fruit.Model.GoodsinformationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goodsinformation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goodsinformation
+    where pkid = #{pkid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goodsinformation
+    where pkid = #{pkid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fruit.Model.GoodsinformationExample">
+    delete from goodsinformation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fruit.Model.Goodsinformation">
+    insert into goodsinformation (pkid, goodsid, classid, 
+      goodsintroduce, goodsbrand, goodsunit, 
+      goodsweight, goodsurl, sales, 
+      pregoodsprice, goodsprice, isrefinement, 
+      ishot, isdiscount, updatatime
+      )
+    values (#{pkid,jdbcType=INTEGER}, #{goodsid,jdbcType=VARCHAR}, #{classid,jdbcType=VARCHAR}, 
+      #{goodsintroduce,jdbcType=VARCHAR}, #{goodsbrand,jdbcType=VARCHAR}, #{goodsunit,jdbcType=VARCHAR}, 
+      #{goodsweight,jdbcType=DECIMAL}, #{goodsurl,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, 
+      #{pregoodsprice,jdbcType=DECIMAL}, #{goodsprice,jdbcType=DECIMAL}, #{isrefinement,jdbcType=VARCHAR}, 
+      #{ishot,jdbcType=VARCHAR}, #{isdiscount,jdbcType=VARCHAR}, #{updatatime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fruit.Model.Goodsinformation">
+    insert into goodsinformation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkid != null">
+        pkid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="goodsintroduce != null">
+        goodsintroduce,
+      </if>
+      <if test="goodsbrand != null">
+        goodsbrand,
+      </if>
+      <if test="goodsunit != null">
+        goodsunit,
+      </if>
+      <if test="goodsweight != null">
+        goodsweight,
+      </if>
+      <if test="goodsurl != null">
+        goodsurl,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="pregoodsprice != null">
+        pregoodsprice,
+      </if>
+      <if test="goodsprice != null">
+        goodsprice,
+      </if>
+      <if test="isrefinement != null">
+        isrefinement,
+      </if>
+      <if test="ishot != null">
+        ishot,
+      </if>
+      <if test="isdiscount != null">
+        isdiscount,
+      </if>
+      <if test="updatatime != null">
+        updatatime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkid != null">
+        #{pkid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsintroduce != null">
+        #{goodsintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbrand != null">
+        #{goodsbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsunit != null">
+        #{goodsunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsweight != null">
+        #{goodsweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsurl != null">
+        #{goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="pregoodsprice != null">
+        #{pregoodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsprice != null">
+        #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="isrefinement != null">
+        #{isrefinement,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="isdiscount != null">
+        #{isdiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="updatatime != null">
+        #{updatatime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fruit.Model.GoodsinformationExample" resultType="java.lang.Long">
+    select count(*) from goodsinformation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goodsinformation
+    <set>
+      <if test="record.pkid != null">
+        pkid = #{record.pkid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null">
+        goodsid = #{record.goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classid != null">
+        classid = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsintroduce != null">
+        goodsintroduce = #{record.goodsintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsbrand != null">
+        goodsbrand = #{record.goodsbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsunit != null">
+        goodsunit = #{record.goodsunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsweight != null">
+        goodsweight = #{record.goodsweight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsurl != null">
+        goodsurl = #{record.goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sales != null">
+        sales = #{record.sales,jdbcType=INTEGER},
+      </if>
+      <if test="record.pregoodsprice != null">
+        pregoodsprice = #{record.pregoodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsprice != null">
+        goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isrefinement != null">
+        isrefinement = #{record.isrefinement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishot != null">
+        ishot = #{record.ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdiscount != null">
+        isdiscount = #{record.isdiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatatime != null">
+        updatatime = #{record.updatatime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goodsinformation
+    set pkid = #{record.pkid,jdbcType=INTEGER},
+      goodsid = #{record.goodsid,jdbcType=VARCHAR},
+      classid = #{record.classid,jdbcType=VARCHAR},
+      goodsintroduce = #{record.goodsintroduce,jdbcType=VARCHAR},
+      goodsbrand = #{record.goodsbrand,jdbcType=VARCHAR},
+      goodsunit = #{record.goodsunit,jdbcType=VARCHAR},
+      goodsweight = #{record.goodsweight,jdbcType=DECIMAL},
+      goodsurl = #{record.goodsurl,jdbcType=VARCHAR},
+      sales = #{record.sales,jdbcType=INTEGER},
+      pregoodsprice = #{record.pregoodsprice,jdbcType=DECIMAL},
+      goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      isrefinement = #{record.isrefinement,jdbcType=VARCHAR},
+      ishot = #{record.ishot,jdbcType=VARCHAR},
+      isdiscount = #{record.isdiscount,jdbcType=VARCHAR},
+      updatatime = #{record.updatatime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Goodsinformation">
+    update goodsinformation
+    <set>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsintroduce != null">
+        goodsintroduce = #{goodsintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbrand != null">
+        goodsbrand = #{goodsbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsunit != null">
+        goodsunit = #{goodsunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsweight != null">
+        goodsweight = #{goodsweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsurl != null">
+        goodsurl = #{goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="pregoodsprice != null">
+        pregoodsprice = #{pregoodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsprice != null">
+        goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="isrefinement != null">
+        isrefinement = #{isrefinement,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        ishot = #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="isdiscount != null">
+        isdiscount = #{isdiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="updatatime != null">
+        updatatime = #{updatatime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pkid = #{pkid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Goodsinformation">
+    update goodsinformation
+    set goodsid = #{goodsid,jdbcType=VARCHAR},
+      classid = #{classid,jdbcType=VARCHAR},
+      goodsintroduce = #{goodsintroduce,jdbcType=VARCHAR},
+      goodsbrand = #{goodsbrand,jdbcType=VARCHAR},
+      goodsunit = #{goodsunit,jdbcType=VARCHAR},
+      goodsweight = #{goodsweight,jdbcType=DECIMAL},
+      goodsurl = #{goodsurl,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=INTEGER},
+      pregoodsprice = #{pregoodsprice,jdbcType=DECIMAL},
+      goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      isrefinement = #{isrefinement,jdbcType=VARCHAR},
+      ishot = #{ishot,jdbcType=VARCHAR},
+      isdiscount = #{isdiscount,jdbcType=VARCHAR},
+      updatatime = #{updatatime,jdbcType=TIMESTAMP}
+    where pkid = #{pkid,jdbcType=INTEGER}
+  </update>
+</mapper>

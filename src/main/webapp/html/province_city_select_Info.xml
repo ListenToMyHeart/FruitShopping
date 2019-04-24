@@ -1,0 +1,25 @@
+<prov id="130000" value="江苏省" text="江苏省">
+    <city id="130100" value="南京市" text="南京市">
+        <county id="130102" value="浦口区" text="浦口区"></county>
+        <county id="130103" value="鼓楼区" text="鼓楼区"></county>
+        <county id="130104" value="玄武区" text="玄武区"></county>
+        <county id="130105" value="白下区" text="白下区"></county>
+        <county id="130107" value="秦淮区" text="秦淮区"></county>
+        <county id="130108" value="建邺区" text="建邺区"></county>
+        <county id="130121" value="下关区" text="下关区"></county>
+        <county id="130123" value="栖霞区" text="栖霞区"></county>
+        <county id="130124" value="雨花台区" text="雨花台区"></county>
+        <county id="130125" value="六合区" text="六合区"></county>
+        <county id="130126" value="江宁区" text="江宁区"></county>
+    </city>
+    <city id="130200" text="无锡市">
+        <county id="130202" value="惠山区" text="惠山区"></county>
+        <county id="130203" value="北塘区" text="北塘区"></county>
+        <county id="130204" value="南长区" text="南长区"></county>
+        <county id="130205" value="锡山区" text="锡山区"></county>
+        <county id="130207" value="宜兴市" text="宜兴市"></county>
+        <county id="130208" value="崇安区" text="崇安区"></county>
+        <county id="130223" value="江阴市" text="江阴市"></county>
+        <county id="130224" value="滨湖区" text="滨湖区"></county>
+    </city>
+</prov>

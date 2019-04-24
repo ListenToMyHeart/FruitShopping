@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.DAO.ShopcartDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.Model.Shopcart">
+    <id column="goodspkid" jdbcType="INTEGER" property="goodspkid" />
+    <id column="memberid" jdbcType="VARCHAR" property="memberid" />
+    <result column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="goodsid" jdbcType="VARCHAR" property="goodsid" />
+    <result column="goodsprice" jdbcType="DECIMAL" property="goodsprice" />
+    <result column="classid" jdbcType="VARCHAR" property="classid" />
+    <result column="totalprice" jdbcType="DECIMAL" property="totalprice" />
+    <result column="goodsnumber" jdbcType="INTEGER" property="goodsnumber" />
+    <result column="cartstatus" jdbcType="VARCHAR" property="cartstatus" />
+    <result column="goodsurl" jdbcType="VARCHAR" property="goodsurl" />
+    <result column="goodspreprice" jdbcType="DECIMAL" property="goodspreprice" />
+    <result column="goodsintroduce" jdbcType="VARCHAR" property="goodsintroduce" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    goodspkid, memberid, cartid, goodsid, goodsprice, classid, totalprice, goodsnumber, 
+    cartstatus, goodsurl, goodspreprice, goodsintroduce
+  </sql>
+  <select id="selectByExample" parameterType="com.fruit.Model.ShopcartExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shopcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fruit.Model.ShopcartKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shopcart
+    where goodspkid = #{goodspkid,jdbcType=INTEGER}
+      and memberid = #{memberid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fruit.Model.ShopcartKey">
+    delete from shopcart
+    where goodspkid = #{goodspkid,jdbcType=INTEGER}
+      and memberid = #{memberid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fruit.Model.ShopcartExample">
+    delete from shopcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fruit.Model.Shopcart">
+    insert into shopcart (goodspkid, memberid, cartid, 
+      goodsid, goodsprice, classid, 
+      totalprice, goodsnumber, cartstatus, 
+      goodsurl, goodspreprice, goodsintroduce
+      )
+    values (#{goodspkid,jdbcType=INTEGER}, #{memberid,jdbcType=VARCHAR}, #{cartid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=VARCHAR}, #{goodsprice,jdbcType=DECIMAL}, #{classid,jdbcType=VARCHAR}, 
+      #{totalprice,jdbcType=DECIMAL}, #{goodsnumber,jdbcType=INTEGER}, #{cartstatus,jdbcType=VARCHAR}, 
+      #{goodsurl,jdbcType=VARCHAR}, #{goodspreprice,jdbcType=DECIMAL}, #{goodsintroduce,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fruit.Model.Shopcart">
+    insert into shopcart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodspkid != null">
+        goodspkid,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="cartid != null">
+        cartid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="goodsprice != null">
+        goodsprice,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="goodsnumber != null">
+        goodsnumber,
+      </if>
+      <if test="cartstatus != null">
+        cartstatus,
+      </if>
+      <if test="goodsurl != null">
+        goodsurl,
+      </if>
+      <if test="goodspreprice != null">
+        goodspreprice,
+      </if>
+      <if test="goodsintroduce != null">
+        goodsintroduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodspkid != null">
+        #{goodspkid,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="cartid != null">
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsnumber != null">
+        #{goodsnumber,jdbcType=INTEGER},
+      </if>
+      <if test="cartstatus != null">
+        #{cartstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsurl != null">
+        #{goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodspreprice != null">
+        #{goodspreprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsintroduce != null">
+        #{goodsintroduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fruit.Model.ShopcartExample" resultType="java.lang.Long">
+    select count(*) from shopcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shopcart
+    <set>
+      <if test="record.goodspkid != null">
+        goodspkid = #{record.goodspkid,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberid != null">
+        memberid = #{record.memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cartid != null">
+        cartid = #{record.cartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null">
+        goodsid = #{record.goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsprice != null">
+        goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.classid != null">
+        classid = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalprice != null">
+        totalprice = #{record.totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsnumber != null">
+        goodsnumber = #{record.goodsnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.cartstatus != null">
+        cartstatus = #{record.cartstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsurl != null">
+        goodsurl = #{record.goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodspreprice != null">
+        goodspreprice = #{record.goodspreprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsintroduce != null">
+        goodsintroduce = #{record.goodsintroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shopcart
+    set goodspkid = #{record.goodspkid,jdbcType=INTEGER},
+      memberid = #{record.memberid,jdbcType=VARCHAR},
+      cartid = #{record.cartid,jdbcType=INTEGER},
+      goodsid = #{record.goodsid,jdbcType=VARCHAR},
+      goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      classid = #{record.classid,jdbcType=VARCHAR},
+      totalprice = #{record.totalprice,jdbcType=DECIMAL},
+      goodsnumber = #{record.goodsnumber,jdbcType=INTEGER},
+      cartstatus = #{record.cartstatus,jdbcType=VARCHAR},
+      goodsurl = #{record.goodsurl,jdbcType=VARCHAR},
+      goodspreprice = #{record.goodspreprice,jdbcType=DECIMAL},
+      goodsintroduce = #{record.goodsintroduce,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Shopcart">
+    update shopcart
+    <set>
+      <if test="cartid != null">
+        cartid = #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsnumber != null">
+        goodsnumber = #{goodsnumber,jdbcType=INTEGER},
+      </if>
+      <if test="cartstatus != null">
+        cartstatus = #{cartstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsurl != null">
+        goodsurl = #{goodsurl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodspreprice != null">
+        goodspreprice = #{goodspreprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsintroduce != null">
+        goodsintroduce = #{goodsintroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goodspkid = #{goodspkid,jdbcType=INTEGER}
+      and memberid = #{memberid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Shopcart">
+    update shopcart
+    set cartid = #{cartid,jdbcType=INTEGER},
+      goodsid = #{goodsid,jdbcType=VARCHAR},
+      goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      classid = #{classid,jdbcType=VARCHAR},
+      totalprice = #{totalprice,jdbcType=DECIMAL},
+      goodsnumber = #{goodsnumber,jdbcType=INTEGER},
+      cartstatus = #{cartstatus,jdbcType=VARCHAR},
+      goodsurl = #{goodsurl,jdbcType=VARCHAR},
+      goodspreprice = #{goodspreprice,jdbcType=DECIMAL},
+      goodsintroduce = #{goodsintroduce,jdbcType=VARCHAR}
+    where goodspkid = #{goodspkid,jdbcType=INTEGER}
+      and memberid = #{memberid,jdbcType=VARCHAR}
+  </update>
+</mapper>

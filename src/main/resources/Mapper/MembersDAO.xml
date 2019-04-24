@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.DAO.MembersDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.Model.Members">
+    <id column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="memberid" jdbcType="VARCHAR" property="memberid" />
+    <result column="truename" jdbcType="VARCHAR" property="truename" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="advancepayment" jdbcType="VARCHAR" property="advancepayment" />
+    <result column="loaddate" jdbcType="TIMESTAMP" property="loaddate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cartid, memberid, truename, sex, phone, email, city, address, postcode, advancepayment, 
+    loaddate
+  </sql>
+  <select id="selectByExample" parameterType="com.fruit.Model.MembersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from members
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from members
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from members
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fruit.Model.MembersExample">
+    delete from members
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fruit.Model.Members">
+    insert into members (cartid, memberid, truename, 
+      sex, phone, email, 
+      city, address, postcode, 
+      advancepayment, loaddate)
+    values (#{cartid,jdbcType=INTEGER}, #{memberid,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{advancepayment,jdbcType=VARCHAR}, #{loaddate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fruit.Model.Members">
+    insert into members
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        cartid,
+      </if>
+      <if test="memberid != null">
+        memberid,
+      </if>
+      <if test="truename != null">
+        truename,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="advancepayment != null">
+        advancepayment,
+      </if>
+      <if test="loaddate != null">
+        loaddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cartid != null">
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null">
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="truename != null">
+        #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="advancepayment != null">
+        #{advancepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="loaddate != null">
+        #{loaddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fruit.Model.MembersExample" resultType="java.lang.Long">
+    select count(*) from members
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update members
+    <set>
+      <if test="record.cartid != null">
+        cartid = #{record.cartid,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberid != null">
+        memberid = #{record.memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.truename != null">
+        truename = #{record.truename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null">
+        postcode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advancepayment != null">
+        advancepayment = #{record.advancepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loaddate != null">
+        loaddate = #{record.loaddate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update members
+    set cartid = #{record.cartid,jdbcType=INTEGER},
+      memberid = #{record.memberid,jdbcType=VARCHAR},
+      truename = #{record.truename,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      postcode = #{record.postcode,jdbcType=VARCHAR},
+      advancepayment = #{record.advancepayment,jdbcType=VARCHAR},
+      loaddate = #{record.loaddate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Members">
+    update members
+    <set>
+      <if test="cartid != null">
+        cartid = #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="truename != null">
+        truename = #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="advancepayment != null">
+        advancepayment = #{advancepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="loaddate != null">
+        loaddate = #{loaddate,jdbcType=DATE},
+      </if>
+    </set>
+    where memberid = #{memberid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Members">
+    update members
+    set memberid = #{memberid,jdbcType=VARCHAR},
+      truename = #{truename,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      advancepayment = #{advancepayment,jdbcType=VARCHAR},
+      loaddate = #{loaddate,jdbcType=DATE}
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+</mapper>

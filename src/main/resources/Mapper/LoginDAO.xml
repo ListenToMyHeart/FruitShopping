@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fruit.DAO.LoginDAO">
-  <resultMap id="BaseResultMap" type="com.fruit.Model.Login">
+<mapper namespace="com.fruit.dao.LoginDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.model.Login">
     <id column="userid" jdbcType="VARCHAR" property="userid" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     userid, password, status, privilege
   </sql>
-  <select id="selectByExample" parameterType="com.fruit.Model.LoginExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fruit.model.LoginExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -100,13 +100,13 @@
     delete from login
     where userid = #{userid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fruit.Model.LoginExample">
+  <delete id="deleteByExample" parameterType="com.fruit.model.LoginExample">
     delete from login
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fruit.Model.Login">
+  <insert id="insert" parameterType="com.fruit.model.Login">
     <selectKey keyProperty="userid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -115,7 +115,7 @@
     values (#{password,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{privilege,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fruit.Model.Login">
+  <insert id="insertSelective" parameterType="com.fruit.model.Login">
     <selectKey keyProperty="userid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fruit.Model.LoginExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fruit.model.LoginExample" resultType="java.lang.Long">
     select count(*) from login
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -179,7 +179,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Login">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.model.Login">
     update login
     <set>
       <if test="password != null">
@@ -194,7 +194,7 @@
     </set>
     where userid = #{userid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Login">
+  <update id="updateByPrimaryKey" parameterType="com.fruit.model.Login">
     update login
     set password = #{password,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},

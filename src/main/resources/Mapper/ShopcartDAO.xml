@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fruit.DAO.ShopcartDAO">
-  <resultMap id="BaseResultMap" type="com.fruit.Model.Shopcart">
+<mapper namespace="com.fruit.dao.ShopcartDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.model.Shopcart">
     <id column="goodspkid" jdbcType="INTEGER" property="goodspkid" />
     <id column="memberid" jdbcType="VARCHAR" property="memberid" />
     <result column="cartid" jdbcType="INTEGER" property="cartid" />
@@ -77,7 +77,7 @@
     goodspkid, memberid, cartid, goodsid, goodsprice, classid, totalprice, goodsnumber, 
     cartstatus, goodsurl, goodspreprice, goodsintroduce
   </sql>
-  <select id="selectByExample" parameterType="com.fruit.Model.ShopcartExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fruit.model.ShopcartExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -99,25 +99,25 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.fruit.Model.ShopcartKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.fruit.model.ShopcartKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from shopcart
     where goodspkid = #{goodspkid,jdbcType=INTEGER}
       and memberid = #{memberid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.fruit.Model.ShopcartKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.fruit.model.ShopcartKey">
     delete from shopcart
     where goodspkid = #{goodspkid,jdbcType=INTEGER}
       and memberid = #{memberid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fruit.Model.ShopcartExample">
+  <delete id="deleteByExample" parameterType="com.fruit.model.ShopcartExample">
     delete from shopcart
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fruit.Model.Shopcart">
+  <insert id="insert" parameterType="com.fruit.model.Shopcart">
     insert into shopcart (goodspkid, memberid, cartid, 
       goodsid, goodsprice, classid, 
       totalprice, goodsnumber, cartstatus, 
@@ -129,7 +129,7 @@
       #{goodsurl,jdbcType=VARCHAR}, #{goodspreprice,jdbcType=DECIMAL}, #{goodsintroduce,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fruit.Model.Shopcart">
+  <insert id="insertSelective" parameterType="com.fruit.model.Shopcart">
     insert into shopcart
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodspkid != null">
@@ -208,7 +208,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fruit.Model.ShopcartExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fruit.model.ShopcartExample" resultType="java.lang.Long">
     select count(*) from shopcart
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -276,7 +276,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Shopcart">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.model.Shopcart">
     update shopcart
     <set>
       <if test="cartid != null">
@@ -313,7 +313,7 @@
     where goodspkid = #{goodspkid,jdbcType=INTEGER}
       and memberid = #{memberid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Shopcart">
+  <update id="updateByPrimaryKey" parameterType="com.fruit.model.Shopcart">
     update shopcart
     set cartid = #{cartid,jdbcType=INTEGER},
       goodsid = #{goodsid,jdbcType=VARCHAR},

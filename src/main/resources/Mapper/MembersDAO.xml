@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fruit.DAO.MembersDAO">
-  <resultMap id="BaseResultMap" type="com.fruit.Model.Members">
+<mapper namespace="com.fruit.dao.MembersDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.model.Members">
     <id column="cartid" jdbcType="INTEGER" property="cartid" />
     <result column="memberid" jdbcType="VARCHAR" property="memberid" />
     <result column="truename" jdbcType="VARCHAR" property="truename" />
@@ -76,7 +76,7 @@
     cartid, memberid, truename, sex, phone, email, city, address, postcode, advancepayment, 
     loaddate
   </sql>
-  <select id="selectByExample" parameterType="com.fruit.Model.MembersExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fruit.model.MembersExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -108,13 +108,13 @@
     delete from members
     where cartid = #{cartid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fruit.Model.MembersExample">
+  <delete id="deleteByExample" parameterType="com.fruit.model.MembersExample">
     delete from members
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fruit.Model.Members">
+  <insert id="insert" parameterType="com.fruit.model.Members">
     insert into members (cartid, memberid, truename, 
       sex, phone, email, 
       city, address, postcode, 
@@ -124,7 +124,7 @@
       #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
       #{advancepayment,jdbcType=VARCHAR}, #{loaddate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.fruit.Model.Members">
+  <insert id="insertSelective" parameterType="com.fruit.model.Members">
     insert into members
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cartid != null">
@@ -197,7 +197,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fruit.Model.MembersExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fruit.model.MembersExample" resultType="java.lang.Long">
     select count(*) from members
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -261,7 +261,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Members">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.model.Members">
     update members
     <set>
       <if test="cartid != null">
@@ -297,7 +297,7 @@
     </set>
     where memberid = #{memberid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Members">
+  <update id="updateByPrimaryKey" parameterType="com.fruit.model.Members">
     update members
     set memberid = #{memberid,jdbcType=VARCHAR},
       truename = #{truename,jdbcType=VARCHAR},

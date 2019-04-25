@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fruit.DAO.GoodsinformationDAO">
-  <resultMap id="BaseResultMap" type="com.fruit.Model.Goodsinformation">
+<mapper namespace="com.fruit.dao.GoodsinformationDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.model.Goodsinformation">
     <id column="pkid" jdbcType="INTEGER" property="pkid" />
     <result column="goodsid" jdbcType="VARCHAR" property="goodsid" />
     <result column="classid" jdbcType="VARCHAR" property="classid" />
@@ -80,7 +80,7 @@
     pkid, goodsid, classid, goodsintroduce, goodsbrand, goodsunit, goodsweight, goodsurl, 
     sales, pregoodsprice, goodsprice, isrefinement, ishot, isdiscount, updatatime
   </sql>
-  <select id="selectByExample" parameterType="com.fruit.Model.GoodsinformationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fruit.model.GoodsinformationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -112,13 +112,13 @@
     delete from goodsinformation
     where pkid = #{pkid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fruit.Model.GoodsinformationExample">
+  <delete id="deleteByExample" parameterType="com.fruit.model.GoodsinformationExample">
     delete from goodsinformation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fruit.Model.Goodsinformation">
+  <insert id="insert" parameterType="com.fruit.model.Goodsinformation">
     insert into goodsinformation (pkid, goodsid, classid, 
       goodsintroduce, goodsbrand, goodsunit, 
       goodsweight, goodsurl, sales, 
@@ -132,7 +132,7 @@
       #{ishot,jdbcType=VARCHAR}, #{isdiscount,jdbcType=VARCHAR}, #{updatatime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fruit.Model.Goodsinformation">
+  <insert id="insertSelective" parameterType="com.fruit.model.Goodsinformation">
     insert into goodsinformation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pkid != null">
@@ -229,7 +229,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fruit.Model.GoodsinformationExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fruit.model.GoodsinformationExample" resultType="java.lang.Long">
     select count(*) from goodsinformation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -309,7 +309,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Goodsinformation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.model.Goodsinformation">
     update goodsinformation
     <set>
       <if test="goodsid != null">
@@ -357,7 +357,7 @@
     </set>
     where pkid = #{pkid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Goodsinformation">
+  <update id="updateByPrimaryKey" parameterType="com.fruit.model.Goodsinformation">
     update goodsinformation
     set goodsid = #{goodsid,jdbcType=VARCHAR},
       classid = #{classid,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fruit.DAO.OrderinformationDAO">
-  <resultMap id="BaseResultMap" type="com.fruit.Model.Orderinformation">
+<mapper namespace="com.fruit.dao.OrderinformationDAO">
+  <resultMap id="BaseResultMap" type="com.fruit.model.Orderinformation">
     <id column="orderid" jdbcType="INTEGER" property="orderid" />
     <result column="goodsid" jdbcType="VARCHAR" property="goodsid" />
     <result column="orderdate" jdbcType="TIMESTAMP" property="orderdate" />
@@ -82,7 +82,7 @@
     receivername, receiverphone, isconfirm, ispayment, address, receiverpostcode, receiveraddress, 
     status
   </sql>
-  <select id="selectByExample" parameterType="com.fruit.Model.OrderinformationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fruit.model.OrderinformationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -114,13 +114,13 @@
     delete from orderinformation
     where orderid = #{orderid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fruit.Model.OrderinformationExample">
+  <delete id="deleteByExample" parameterType="com.fruit.model.OrderinformationExample">
     delete from orderinformation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fruit.Model.Orderinformation">
+  <insert id="insert" parameterType="com.fruit.model.Orderinformation">
     insert into orderinformation (orderid, goodsid, orderdate, 
       goodsprice, totalprice, paytype, 
       shiptype, memberid, receivername, 
@@ -134,7 +134,7 @@
       #{address,jdbcType=VARCHAR}, #{receiverpostcode,jdbcType=VARCHAR}, #{receiveraddress,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.fruit.Model.Orderinformation">
+  <insert id="insertSelective" parameterType="com.fruit.model.Orderinformation">
     insert into orderinformation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -237,7 +237,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fruit.Model.OrderinformationExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.fruit.model.OrderinformationExample" resultType="java.lang.Long">
     select count(*) from orderinformation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -321,7 +321,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.Model.Orderinformation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fruit.model.Orderinformation">
     update orderinformation
     <set>
       <if test="goodsid != null">
@@ -372,7 +372,7 @@
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fruit.Model.Orderinformation">
+  <update id="updateByPrimaryKey" parameterType="com.fruit.model.Orderinformation">
     update orderinformation
     set goodsid = #{goodsid,jdbcType=VARCHAR},
       orderdate = #{orderdate,jdbcType=TIMESTAMP},

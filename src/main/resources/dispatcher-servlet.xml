@@ -54,7 +54,7 @@
     </bean>
 
     <mvc:interceptors>
-        <bean class="com.fruit.Utils.MyDispacher">
+        <bean class="com.fruit.utils.MyDispacher">
             <property name="blackList">
                 <list>
                     <value>pay.html</value>
@@ -64,5 +64,5 @@
             </property>
         </bean>
     </mvc:interceptors>
-    <context:component-scan base-package="com.fruit.Controller,com.fruit.Service.Impl,com.fruit.DAO"/>
+    <context:component-scan base-package="com.fruit.controller,com.fruit.service.Impl,com.fruit.dao"/>
 </beans>

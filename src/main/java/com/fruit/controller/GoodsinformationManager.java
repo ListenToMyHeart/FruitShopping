@@ -32,7 +32,7 @@ public class GoodsinformationManager {
 
 
     //根据关键字查询
-    @GetMapping(value="/search/{keyword}")
+    @GetMapping(value="/goodsid/{keyword}")
     public JSONObject searchInformation(@PathVariable String keyword){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();

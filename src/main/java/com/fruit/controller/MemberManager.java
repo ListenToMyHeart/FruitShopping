@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Admin on 2017/4/12.
  */
-@Controller
+@RestController
 @RequestMapping("/members")
 public class MemberManager {
     @Autowired
@@ -28,8 +28,7 @@ public class MemberManager {
     UserService userService;
 
     //查找所有会员信息
-    @RequestMapping("/searchAll")
-    @ResponseBody
+    @GetMapping("/searchAll")
     public JSONObject searchAll(){
         MembersExample membersExample=new MembersExample();
         JSONObject jsonObject=new JSONObject();
@@ -45,9 +44,9 @@ public class MemberManager {
         jsonObject.put("members",membersList);
         return jsonObject;
     }
+
     //通过购物车号查看单个会员信息
-    @RequestMapping(value = "/searchByCartid/{cartid}" ,method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/searchByCartid/{cartid}")
     public JSONObject searchByCartid(@PathVariable int cartid){
         JSONObject jsonObject=new JSONObject();
         Members members=memberService.selectByPrimaryKey(cartid);
@@ -56,9 +55,9 @@ public class MemberManager {
         jsonObject.put("user",user);
         return jsonObject;
     }
+
     //冻结会员
-    @RequestMapping(value = "/frozzenMember",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/frozzenMember")
     public JSONObject frozzenMember(@RequestBody Members member){
         JSONObject jsonObject=new JSONObject();
         User user=new User();
@@ -81,11 +80,10 @@ public class MemberManager {
         }
         return  jsonObject;
     }
-    //通过memberid查看会员
-    @RequestMapping(value = "/searchByMemberid" ,method = RequestMethod.GET)
-    @ResponseBody
-    public JSONObject searchByMemberid(HttpServletRequest httpServletRequest){
 
+    //通过memberid查看会员
+    @GetMapping(value = "/searchByMemberid")
+    public JSONObject searchByMemberid(HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
         HttpSession httpSession=httpServletRequest.getSession();
         String memberid=(String)httpSession.getAttribute("username");
@@ -98,8 +96,7 @@ public class MemberManager {
     }
 
     //更新会员信息
-    @RequestMapping(value = "/updateByMemberid" ,method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/updateByMemberid")
     public JSONObject updateByMemberid(@RequestBody Members members, HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
         HttpSession session=httpServletRequest.getSession();

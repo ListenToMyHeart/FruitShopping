@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Admin on 2017/4/27.
  */
 
-@Controller
+@RestController
 @RequestMapping("/shopcart")
 public class ShopcartManager {
 
@@ -34,8 +34,7 @@ public class ShopcartManager {
 
     //添加购物车
 
-    @RequestMapping(value = "/goods/{goodspkid}",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/goods/{goodspkid}")
     public JSONObject addGoodsToShopcart(@RequestBody Shopcart shopcart, HttpServletRequest httpServletRequest){
         HttpSession session=httpServletRequest.getSession();
         JSONObject jsonObject=new JSONObject();
@@ -85,8 +84,7 @@ public class ShopcartManager {
 
     }
 
-    @RequestMapping( value = "/shopcartGoods",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping( value = "/shopcartGoods")
     public JSONObject getShopcartByMemberid(HttpServletRequest httpServletRequest){
 
         JSONObject jsonObject=new JSONObject();
@@ -104,11 +102,8 @@ public class ShopcartManager {
         return  jsonObject;
     }
 
-
-
     //更新购物车信息
-    @RequestMapping(value = "/goods/{goodspkid}",method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(value = "/goods/{goodspkid}")
     public JSONObject updateGoodsToShopcart(@RequestBody Shopcart shopcart, HttpServletRequest httpServletRequest){
         HttpSession session=httpServletRequest.getSession();
         JSONObject jsonObject=new JSONObject();
@@ -130,8 +125,7 @@ public class ShopcartManager {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/goods/{goodspkid}",method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping(value = "/goods/{goodspkid}")
     public JSONObject deleteShopGoods(@PathVariable int goodspkid, HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
         HttpSession session=httpServletRequest.getSession();
@@ -151,8 +145,7 @@ public class ShopcartManager {
     }
 
     //获取购物车中特定条件商品信息
-    @RequestMapping(value = "/searchPayGoods",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/searchPayGoods")
     public JSONObject searchPayGoods(@RequestBody Shopcart shopcart,HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
         HttpSession session=httpServletRequest.getSession();

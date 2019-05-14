@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by Admin on 2017/4/3.
  */
-@Controller
+@RestController
 @RequestMapping("/login")
 public class UserManager {
 
@@ -28,8 +28,7 @@ public class UserManager {
 
     //用户登录
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping("/login")
     public JSONObject userLogin(@RequestBody User user, HttpSession httpSession){
         JSONObject jsonObject= new JSONObject();
         User user1=userService.selectByPrimaryKey(user.getUserid());
@@ -68,8 +67,7 @@ public class UserManager {
     }
 
     //用户注册
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/register")
     public  JSONObject createUser(@RequestBody User user){
 
         JSONObject jsonObject=new JSONObject();
@@ -109,8 +107,7 @@ public class UserManager {
     }
 
     //得到一个user信息
-    @RequestMapping(value = "/{userid}",method=RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/{userid}")
     public JSONObject getUserById(@PathVariable String userid) {
         JSONObject jsonObject = new JSONObject();
         User user = userService.selectByPrimaryKey(userid);
@@ -120,8 +117,7 @@ public class UserManager {
     }
 
     //获取当前用户名
-    @RequestMapping(value = "/getUsername",method=RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getUsername")
     public JSONObject getUserById(HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
 
@@ -138,8 +134,7 @@ public class UserManager {
     }
 
     //退出登录
-    @RequestMapping("/logout")
-    @ResponseBody
+    @GetMapping("/logout")
     public JSONObject logout(HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
         HttpSession session=httpServletRequest.getSession();
@@ -149,8 +144,7 @@ public class UserManager {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/password",method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(value = "/password")
     public JSONObject modifyPassword(@RequestBody JSONObject jsonObject,HttpServletRequest httpServletRequest){
         HttpSession session=httpServletRequest.getSession();
         JSONObject apply=new JSONObject();

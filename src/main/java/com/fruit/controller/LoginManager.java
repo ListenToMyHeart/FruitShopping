@@ -5,21 +5,18 @@ import com.fruit.model.Login;
 import com.fruit.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Admin on 2017/3/30.
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class LoginManager {
     @Autowired
     LoginService userService;
 
-    @RequestMapping("/{userid}")
-    @ResponseBody
+    @GetMapping("/{userid}")
     public JSONObject getUserById(@PathVariable String userid) {
         JSONObject jsonObject = new JSONObject();
 

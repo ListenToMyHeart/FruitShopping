@@ -20,9 +20,10 @@ import java.util.List;
 /**
  * Created by Admin on 2017/4/12.
  */
-@Controller
+@RestController
 @RequestMapping("/orderInformation")
 public class OrderInformationManager {
+
     @Autowired
     OrderInformationService orderInformationService;
     @Autowired
@@ -35,8 +36,7 @@ public class OrderInformationManager {
     AddressService addressService;
 
     //商品购买
-    @RequestMapping(value = "/buy" ,method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/buy")
     public JSONObject addOrderInfo(@RequestBody Orderinformation orderinformation, HttpServletRequest httpServletRequest){
 
         JSONObject jsonObject=new JSONObject();
@@ -120,9 +120,7 @@ public class OrderInformationManager {
     }
 
     //获得自动生成的商品id
-
-    @RequestMapping(value = "/getOrderid" ,method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/getOrderid")
     public JSONObject getOrderid(@RequestBody Orderinformation orderinformation){
         JSONObject jsonObject=new JSONObject();
         OrderinformationExample orderinformationExample=new OrderinformationExample();
@@ -138,8 +136,7 @@ public class OrderInformationManager {
     }
 
     //查看未接收的订单信息
-    @RequestMapping("/searchReciveOrder")
-    @ResponseBody
+    @GetMapping("/searchReciveOrder")
     public JSONObject searchReciveOrder(){
         JSONObject jsonObject=new JSONObject();
         OrderinformationExample orderinformationExample=new OrderinformationExample();
@@ -149,9 +146,9 @@ public class OrderInformationManager {
         jsonObject.put("orderInformation",orderinformationList);
         return jsonObject;
     }
+
     //查看已接收的订单信息
-    @RequestMapping("/searchRecivedOrder")
-    @ResponseBody
+    @GetMapping("/searchRecivedOrder")
     public JSONObject searchRecivedOrder(){
         JSONObject jsonObject=new JSONObject();
         OrderinformationExample orderinformationExample=new OrderinformationExample();
@@ -165,9 +162,9 @@ public class OrderInformationManager {
         jsonObject.put("orderInformation",orderinformationList);
         return jsonObject;
     }
+
     //查看已完成的订单信息
-    @RequestMapping("/searchFinishedOrder")
-    @ResponseBody
+    @GetMapping("/searchFinishedOrder")
     public JSONObject searchFinishedOrder(){
         JSONObject jsonObject=new JSONObject();
         OrderinformationExample orderinformationExample=new OrderinformationExample();
@@ -181,9 +178,9 @@ public class OrderInformationManager {
         jsonObject.put("orderInformation",orderinformationList);
         return jsonObject;
     }
+
     //通过orderid查询一件商品信息
-    @RequestMapping("/searchById/{keyword}")
-    @ResponseBody
+    @GetMapping("/searchById/{keyword}")
     public JSONObject searchById(@PathVariable int keyword ){
 
         Orderinformation orderinformation=orderInformationService.selectByPrimaryKey(keyword);
@@ -195,8 +192,7 @@ public class OrderInformationManager {
     }
 
     //更新订单状态
-    @RequestMapping(value = "/modifyStatusToReceived/{orderid}",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/modifyStatusToReceived/{orderid}")
     public JSONObject updateStatusToReceived(@PathVariable("orderid") int orderid,@RequestBody Orderinformation orderinformation){
         JSONObject jsonObject=new JSONObject();
         orderinformation.setOrderid(orderid);
@@ -206,8 +202,7 @@ public class OrderInformationManager {
     }
 
     //更新订单
-    @RequestMapping(value = "/updateOrderInformation/{orderid}",method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(value = "/updateOrderInformation/{orderid}")
     public JSONObject updateStatusToReceived(@RequestBody Orderinformation orderinformation){
         JSONObject jsonObject=new JSONObject();
         int n=  orderInformationService.updateByPrimaryKeySelective(orderinformation);
@@ -221,8 +216,7 @@ public class OrderInformationManager {
     }
 
     //付款结账更新订单
-    @RequestMapping(value = "/buyGoodsByMoney/{orderid}",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/buyGoodsByMoney/{orderid}")
     public JSONObject buyGoodsByMoney(@PathVariable int orderid,HttpServletRequest httpServletRequest){
         JSONObject jsonObject=new JSONObject();
 
@@ -291,9 +285,9 @@ public class OrderInformationManager {
         }
         return jsonObject;
     }
+
     //返回所有退款退货订单
-    @RequestMapping(value = "/returnGoods",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/returnGoods")
     public JSONObject returnGoods(){
         JSONObject jsonObject=new JSONObject();
         OrderinformationExample orderinformationExample=new OrderinformationExample();
@@ -315,8 +309,7 @@ public class OrderInformationManager {
     }
 
     //通过memberid返回一个人的所有订单
-    @RequestMapping("/member/orders")
-    @ResponseBody
+    @GetMapping("/member/orders")
     public JSONObject searchOrdersByMemberid(HttpServletRequest httpServletRequest){
         HttpSession httpSession=httpServletRequest.getSession();
         JSONObject jsonObject=new JSONObject();
@@ -347,8 +340,7 @@ public class OrderInformationManager {
     }
 
     //删除订单
-    @RequestMapping(value = "/orders/{orderid}",method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping(value = "/orders/{orderid}")
     public  JSONObject deleteOrders(@PathVariable int orderid){
         JSONObject jsonObject=new JSONObject();
         int n=orderInformationService.deleteByPrimaryKey(orderid);
@@ -364,8 +356,7 @@ public class OrderInformationManager {
     }
 
     //通过memberid查询订单信息和对应的商品信息
-    @RequestMapping("/getOrderAndGoods/{orderid}")
-    @ResponseBody
+    @GetMapping("/getOrderAndGoods/{orderid}")
     public JSONObject getOrderAndGoods(@PathVariable int orderid){
         JSONObject jsonObject=new JSONObject();
         try {
@@ -385,8 +376,7 @@ public class OrderInformationManager {
 
     //购物车付款
 
-    @RequestMapping("/shopcartBuy/{goodspkid}")
-    @ResponseBody
+    @GetMapping("/shopcartBuy/{goodspkid}")
     public JSONObject shopcartBuy(@PathVariable int goodspkid,HttpServletRequest httpServletRequest){
 
         JSONObject jsonObject=new JSONObject();
@@ -479,10 +469,8 @@ public class OrderInformationManager {
     }
 
 
-
     //测试
-    @RequestMapping("/dispatcher")
-    @ResponseBody
+    @GetMapping("/dispatcher")
     public void test(){
 
     }

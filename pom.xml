@@ -25,19 +25,19 @@
   <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
-    <version>4.2.5.RELEASE</version>
+    <version>5.1.2.RELEASE</version>
   </dependency>
   <!--spring-->
   <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>4.2.5.RELEASE</version>
+    <version>5.1.2.RELEASE</version>
   </dependency>
   <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
   <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-tx</artifactId>
-    <version>4.2.5.RELEASE</version>
+    <version>5.1.2.RELEASE</version>
   </dependency>
 
   <!--servlet,jsp,jstl-->

@@ -23,15 +23,16 @@ import java.util.UUID;
 /**
  * Created by Admin on 2017/4/4.
  */
-@Controller
+@RestController
 @RequestMapping("/goodsInformation")
 public class GoodsinformationManager {
 
     @Autowired
     GoodsinformationService goodsinformationService;
+
+
     //根据关键字查询
-    @RequestMapping(value="/search/{keyword}",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value="/search/{keyword}")
     public JSONObject searchInformation(@PathVariable String keyword){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -44,8 +45,7 @@ public class GoodsinformationManager {
     }
 
     //寻找一件商品
-    @RequestMapping(value="/searchOne/{pkid}",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value="/searchOne/{pkid}")
     public JSONObject searchOne(@PathVariable int pkid){
         JSONObject jsonObject=new JSONObject();
         Goodsinformation goods=goodsinformationService.selectByPrimaryKey(pkid);
@@ -53,8 +53,7 @@ public class GoodsinformationManager {
         return jsonObject;
     }
     //修改一件商品
-    @RequestMapping(value="/searchOne/{pkid}",method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(value="/searchOne/{pkid}")
     public JSONObject modifyOne(@RequestBody Goodsinformation goodsinformation){
         JSONObject jsonObject=new JSONObject();
        int n=goodsinformationService.updateByPrimaryKeySelective(goodsinformation);
@@ -69,8 +68,7 @@ public class GoodsinformationManager {
 
     //删除一件商品
 
-    @RequestMapping(value="/searchOne/{pkid}",method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping(value="/searchOne/{pkid}")
     public JSONObject deleteGoods(@PathVariable int pkid){
         JSONObject jsonObject=new JSONObject();
         Goodsinformation goodsinformation=new Goodsinformation();
@@ -88,8 +86,7 @@ public class GoodsinformationManager {
     }
 
     //查找所有商品信息
-    @RequestMapping(value="/searchGoods")
-    @ResponseBody
+    @GetMapping(value="/searchGoods")
     public JSONObject searchGoods(){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -107,8 +104,7 @@ public class GoodsinformationManager {
         return jsonObject;
     }
     //查找打折的商品
-    @RequestMapping(value="/searchDiscountGoods")
-    @ResponseBody
+    @GetMapping(value="/searchDiscountGoods")
     public JSONObject searchDiscountGoods(){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -121,8 +117,7 @@ public class GoodsinformationManager {
         return jsonObject;
     }
     //查找国内商品
-    @RequestMapping(value="/searchGuoneiGoods")
-    @ResponseBody
+    @GetMapping(value="/searchGuoneiGoods")
     public JSONObject searchGuoneiGoods(){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -135,8 +130,7 @@ public class GoodsinformationManager {
         return jsonObject;
     }
         //查找进口商品
-    @RequestMapping(value="/searchJinkouGoods")
-    @ResponseBody
+    @GetMapping(value="/searchJinkouGoods")
     public JSONObject searchJinkouGoods(){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -150,8 +144,7 @@ public class GoodsinformationManager {
     }
 
     //查询国内和进口的所有水果
-    @RequestMapping(value="/searchGJ/{keyword}",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value="/searchGJ/{keyword}")
     public JSONObject searchGJgoods(@PathVariable String keyword){
         JSONObject jsonObject=new JSONObject();
         GoodsinformationExample goodsinformationExample=new GoodsinformationExample();
@@ -167,8 +160,7 @@ public class GoodsinformationManager {
         return jsonObject;
     }
     //增加商品信息
-    @RequestMapping(value = "/addGoodsInformation",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/addGoodsInformation")
     public JSONObject addGoodsInformation(String goodsid,String classid,String goodsintroduce,String goodsweight,String goodsprice,
                                           @RequestParam("imgAddress")MultipartFile file) throws DataAccessException{
         String imgAddress="";
